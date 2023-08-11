@@ -35,14 +35,24 @@ public class calculate extends HttpServlet{
         }
         else
         {
-            if(!"+".equals(op))
-            if("-".equals(op))
-                out.print(" "+(n1-n2)+"</h1");
-            else if("*".equals(op))
-                out.print(" "+(n1*n2)+"</h1");
-            else if("/".equals(op))
-                out.print(" "+(n1/n2)+"</h1");
-            else out.print(" "+(n1+n2)+"</h1");
+      
+            switch (op)
+            {
+                    case "+":
+                        out.print(" "+(n1+n2)+"</h1");
+                        break;
+                    case "-":
+                        out.print(" "+(n1-n2)+"</h1");
+                        break;
+                    case "*":
+                        out.print(" "+(n1*n2)+"</h1");
+                        break;
+                    case "/":
+                        out.print(" "+(n1/n2)+"</h1");
+                        break;
+                    default:
+                        break;
+            }
         }
         
     }

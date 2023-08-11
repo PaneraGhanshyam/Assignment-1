@@ -28,6 +28,7 @@ public class calculate extends HttpServlet{
         int n2=Integer.parseInt(req.getParameter("num2"));
         out.print(n2+" :");
         
+        
         if(n2==0 && op.equals("/"))
         {
             out.print("can not divide by zero");

@@ -28,14 +28,22 @@ public class calculate extends HttpServlet{
         int n2=Integer.parseInt(req.getParameter("num2"));
         out.print(n2+" :");
         
-        if("+".equals(op))
-            out.print(" "+(n1+n2)+"</h1");
-        else if("-".equals(op))
-            out.print(" "+(n1-n2)+"</h1");
-        else if("*".equals(op))
-            out.print(" "+(n1*n2)+"</h1");
-        else if("/".equals(op))
-            out.print(" "+(n1/n2)+"</h1");
+        if(n2==0 && op.equals("/"))
+        {
+            out.print("can not divide by zero");
+        }
+        else
+        {
+            if(!"+".equals(op))
+            if("-".equals(op))
+                out.print(" "+(n1-n2)+"</h1");
+            else if("*".equals(op))
+                out.print(" "+(n1*n2)+"</h1");
+            else if("/".equals(op))
+                out.print(" "+(n1/n2)+"</h1");
+            else out.print(" "+(n1+n2)+"</h1");
+        }
+        
     }
     
 }

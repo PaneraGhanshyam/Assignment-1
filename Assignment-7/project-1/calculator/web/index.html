@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            display: inline-block;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        table {
+            width: 100%;
+        }
+
+        th {
+            text-align: left;
+            padding: 8px;
+        }
+
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.3s ease;
+        }
+        
+        input:invalid,
+        input:placeholder-shown,
+        select:invalid,
+        select:placeholder-shown {
+            border-color: #ff0000; 
+        }
+
+        input[type="submit"],
+        input[type="reset"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover,
+        input[type="reset"]:hover {
+            background-color: #0056b3;
+        }
+
+        form > table > tr > th {
+            padding-bottom: 10px;
+        }
+
+        form > table > tr > th input[type="submit"],
+        form > table > tr > th input[type="reset"] {
+            margin-right: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>CALCULATOR</h1>
+    <form action="calculate" method="POST">
+        <table>
+            <tr>
+                <th>Enter first number:</th>
+                <th><input type="number" name="num1" value="0" placeholder="Enter Number" required></th>
+            </tr>
+            <tr>
+                <th>Enter second number:</th>
+                <th><input type="number" name="num2" value="0" placeholder="Enter Number" required></th>
+            </tr>
+            <tr>
+                <th>Select operation:</th>
+                <th>
+                    <select name="operation" required>
+                        <option value="+" selected>Addition</option>
+                        <option value="-">Subtraction</option>
+                        <option value="*">Multiplication</option>
+                        <option value="/">Division</option>
+                    </select>
+                </th>
+            </tr>
+            <tr>
+                <th><input type="submit" name="submit">&nbsp;<input type="reset" name="reset"></th>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

@@ -24,7 +24,7 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="index.jsp">Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Profile</a>
@@ -36,12 +36,9 @@
                 <a class="nav-link" href="#">History</a>
               </li>
             </ul>
+               <!-- Logout Button -->
+              <a href="LogoutServlet" class="btn btn-outline-danger my-2 my-sm-0" type="submit">Logout</a>
           </div>
-          
-          <!-- Logout Button -->
-          <form class="form-inline my-2 my-lg-0">
-            <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Logout</button>
-          </form>
         </nav>
     </body>
 </html>

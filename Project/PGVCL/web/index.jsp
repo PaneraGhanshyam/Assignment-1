@@ -1,7 +1,23 @@
+<%-- 
+    Document   : index
+    Created on : Aug 13, 2023, 8:32:25 PM
+    Author     : ghanshyam
+--%>
+<%
+  User user=(User)session.getAttribute("currentUser");
+  
+  if(user==null || user.getStatus().equals("deactive"))
+  {
+    response.sendRedirect("login.jsp");
+  }
+  else
+  {
+ %>
+<%@page import="com.PGVCL.Entities.User"%>
 <%@page import="com.PGVCL.Helper.ConnectionProvider"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*" %>
-
+<%@page errorPage="error_page.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,11 +27,21 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 
-<body>
-<%@include file="user_nav.jsp" %>
+<body style="background-color: #eceff1;">
+<% 
+    if(user.getType().equals("admin"))
+    {
+%>
+        <%@include file="auth_nav.jsp" %>
+<%  }
+    else
+    {
+%>      
+        <%@include file="user_nav.jsp" %>
+<%  } %>
 
     <!-- Banner Section -->
-    <section class="jumbotron text-center">
+    <section class="jumbotron text-center" style="background-color: #546e7a; color: white;">
       <div class="container">
         <h1 class="display-4">Providing Reliable Electrical Solutions</h1>
         <p class="lead">We specialize in delivering high-quality electrical services for homes and businesses.</p>
@@ -23,7 +49,7 @@
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="py-5">
+    <section id="services" class="py-5" style="background-color: #b0bec5;">
       <div class="container">
         <div class="row">
           <!-- Residential Services -->
@@ -63,3 +89,4 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+<% }%>

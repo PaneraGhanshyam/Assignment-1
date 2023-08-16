@@ -20,6 +20,13 @@
     .error-border {
       border: 1px solid red;
     }
+    /* Center-align the preloader */
+    .preloader {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
   </style>
 </head>
 <body style="min-height: 90vh; background-color: #343a40; color: white;">
@@ -33,7 +40,7 @@
         </div>
         <div class="card-body" style="background-color: #b0bec5; border-radius: 10px;">
           <!-- Login Form -->
-          <form action="LoginServlet" method="POST">
+          <form action="LoginServlet" method="POST" onsubmit="showPreloader()">
             <!-- Number Input -->
             <div class="form-group">
               <label for="number" style="color: black;">Number</label>
@@ -76,7 +83,6 @@ boolean loginSuccess = request.getAttribute("loginSuccess") != null && (boolean)
 boolean checkStatus = request.getAttribute("checkStatus") != null && (boolean) request.getAttribute("checkStatus");
 boolean userExists = request.getAttribute("userExists") != null && (boolean) request.getAttribute("userExists");
 boolean con = false;
-
 if (loginSuccess == con && request.getAttribute("loginSuccess") != null) {
 %>
 <script>

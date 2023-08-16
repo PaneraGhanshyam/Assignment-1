@@ -1,7 +1,6 @@
 
 package com.PGVCL.Servelets;
 
-import com.PGVCL.Entities.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;

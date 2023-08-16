@@ -6,7 +6,7 @@
 <%
   User user=(User)session.getAttribute("currentUser");
   
-  if(user==null || user.getStatus().equals("deactive"))
+  if(user==null)
   {
     response.sendRedirect("login.jsp");
   }
@@ -14,7 +14,6 @@
   {
  %>
 <%@page import="com.PGVCL.Entities.User"%>
-<%@page import="com.PGVCL.Helper.ConnectionProvider"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.sql.*" %>
 <%@page errorPage="error_page.jsp" %>
@@ -89,4 +88,4 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-<% }%>
+<% } %>

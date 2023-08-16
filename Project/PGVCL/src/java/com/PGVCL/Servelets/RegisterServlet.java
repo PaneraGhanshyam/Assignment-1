@@ -46,14 +46,24 @@ public class RegisterServlet extends HttpServlet {
             String type="user";
             String status="deactive";
             
-            User user=new User(username,email,address,number,password,type,status);
-            
             UserDao dao=new UserDao(ConnectionProvider.getConnection());
-      
-            if (dao.insertUser(user)) {
-                request.setAttribute("registrationSuccess", true);
+            
+            boolean check=dao.checkUserExist(number);
+            
+            if(check)
+            {
+                request.setAttribute("registrationSuccess", false);
                 request.getRequestDispatcher("register.jsp").forward(request, response);
-             }
+            }
+            else
+            {
+                User user=new User(username,email,address,number,password,type,status);
+      
+                if (dao.insertUser(user)) {
+                    request.setAttribute("registrationSuccess", true);
+                    request.getRequestDispatcher("register.jsp").forward(request, response);
+                 }
+            }
 
             out.println("</body>");
             out.println("</html>");

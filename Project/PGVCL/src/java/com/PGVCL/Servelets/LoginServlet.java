@@ -49,11 +49,18 @@ public class LoginServlet extends HttpServlet {
            User user=dao.getUserByNumberAndPassword(Number, Password, Type);
            
            if(user==null)
-           {
+           {   
                //error            
-               out.print("enter valid detail.");
+               request.setAttribute("loginSuccess", false);
+               request.getRequestDispatcher("login.jsp").forward(request, response);
            }
-           else
+           else if(user.getStatus().equals("deactive"))
+           {    
+                //checkstatus
+                request.setAttribute("checkStatus", false);
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+           }
+           else if(user.getStatus().equals("active"))
            {
                //success
                HttpSession s=request.getSession();

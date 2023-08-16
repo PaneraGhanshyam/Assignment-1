@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@page errorPage="error_page.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -151,7 +151,9 @@
 </html>
 <%
 boolean registrationSuccess = request.getAttribute("registrationSuccess") != null && (boolean) request.getAttribute("registrationSuccess");
-if (registrationSuccess) {
+boolean check=true;
+if (registrationSuccess==check && request.getAttribute("registrationSuccess") != null) 
+{
 %>
     <script>
         alert("Registration successful");
@@ -159,4 +161,12 @@ if (registrationSuccess) {
     </script>
 <%
 }
+else if(registrationSuccess!=check && request.getAttribute("registrationSuccess") != null)
+{
 %>
+
+    <script>
+        alert("Number already exist.");
+        window.location.replace("register.jsp");
+    </script>
+<% } %>

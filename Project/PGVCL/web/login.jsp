@@ -4,6 +4,7 @@
     Author     : ghanshyam
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page errorPage="error_page.jsp" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +22,7 @@
     }
   </style>
 </head>
-<body style="min-height: 100vh; background-color: #343a40; color: white;">
+<body style="min-height: 90vh; background-color: #343a40; color: white;">
 
 <div class="container mt-5">
   <div class="row justify-content-center">
@@ -70,7 +71,29 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<%
+boolean loginSuccess = request.getAttribute("loginSuccess") != null && (boolean) request.getAttribute("loginSuccess");
+boolean checkStatus = request.getAttribute("checkStatus") != null && (boolean) request.getAttribute("checkStatus");
+boolean userExists = request.getAttribute("userExists") != null && (boolean) request.getAttribute("userExists");
+boolean con = false;
+
+if (loginSuccess == con && request.getAttribute("loginSuccess") != null) {
+%>
+<script>
+    alert("Enter valid detail.");
+    window.location.replace("login.jsp");
+</script>
+<%
+    request.removeAttribute("loginSuccess");
+} else if (checkStatus == con && request.getAttribute("checkStatus") != null) {
+%>
+<script>
+    alert("Account deactive.");
+    window.location.replace("login.jsp");
+</script>
+<%
+    request.removeAttribute("checkStatus");
+}
+%>
 </body>
 </html>
-
-

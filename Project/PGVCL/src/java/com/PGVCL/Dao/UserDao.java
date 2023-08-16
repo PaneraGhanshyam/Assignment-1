@@ -80,4 +80,31 @@ public class UserDao {
         
         return user;
     }
+    
+    public boolean checkUserExist(String number)
+    {
+        boolean check=false;
+        
+         try
+        {
+            String query="select number from user where number=?";
+            PreparedStatement pstm=con.prepareStatement(query);
+            
+            pstm.setString(1, number);
+            
+            ResultSet set=pstm.executeQuery();
+            
+            if(set.next())
+            {
+                check=true;
+                
+            }
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }    
+        
+        
+        return check;
+    }
 }

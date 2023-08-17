@@ -1,7 +1,9 @@
-
 package com.PGVCL.Servelets;
 
+import com.PGVCL.Dao.UserDao;
 import com.PGVCL.Entities.ErrorMessage;
+import com.PGVCL.Entities.User;
+import com.PGVCL.Helper.ConnectionProvider;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -14,7 +16,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author ghanshyam
  */
-public class LogoutServlet extends HttpServlet {
+public class EditProfileServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,17 +35,35 @@ public class LogoutServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LogoutServlet</title>");            
+            out.println("<title>Servlet EditProfileServlet</title>");            
             out.println("</head>");
             out.println("<body>");
             
-             HttpSession s=request.getSession();
-             s.removeAttribute("currentUser");
-             
-             ErrorMessage msg=new ErrorMessage("Successfully Logout !","userLogout","alert-success");
-             s.setAttribute("Message", msg);
-             
-             response.sendRedirect("login.jsp");
+            //fetch form data
+            String username=request.getParameter("username");
+            String email=request.getParameter("email");
+            String address=request.getParameter("address");
+            String number=request.getParameter("number");
+            String password=request.getParameter("confirmpassword");
+            
+            HttpSession s=request.getSession();
+            User u=(User)s.getAttribute("currentUser");
+            
+            u.setUsername(username);
+            u.setEmail(email);
+            u.setAddress(address);
+            u.setNumber(number);
+            u.setPassword(password);
+            
+            UserDao dao=new UserDao(ConnectionProvider.getConnection());
+            
+             if (dao.updateUser(u)) {
+                ErrorMessage msg=new ErrorMessage("update Succesfull !","updateSucces","alert-success");
+                s.setAttribute("Message", msg);
+
+                response.sendRedirect("profile.jsp");
+              }
+     
             
             out.println("</body>");
             out.println("</html>");

@@ -3,6 +3,10 @@
     Created on : Aug 13, 2023, 8:32:25 PM
     Author     : ghanshyam
 --%>
+
+<%@page import="com.PGVCL.Entities.User"%>
+<%@page import="java.sql.*" %>
+<%@page errorPage="error_page.jsp" %>
 <%
   User user=(User)session.getAttribute("currentUser");
   
@@ -13,14 +17,12 @@
   else
   {
  %>
-<%@page import="com.PGVCL.Entities.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.sql.*" %>
-<%@page errorPage="error_page.jsp" %>
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
     <title>Home</title>
     
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -49,7 +51,7 @@
 
     <!-- Services Section -->
     <section id="services" class="py-5" style="background-color: #b0bec5;">
-      <div class="container">
+      <div class="container mt-5">
         <div class="row">
           <!-- Residential Services -->
           <div class="col-md-4 col-sm-6">

@@ -1,6 +1,7 @@
 package com.PGVCL.Servelets;
 
 import com.PGVCL.Dao.UserDao;
+import com.PGVCL.Entities.ErrorMessage;
 import com.PGVCL.Entities.User;
 import com.PGVCL.Helper.ConnectionProvider;
 import java.io.IOException;
@@ -9,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -52,16 +54,22 @@ public class RegisterServlet extends HttpServlet {
             
             if(check)
             {
-                request.setAttribute("registrationSuccess", false);
-                request.getRequestDispatcher("register.jsp").forward(request, response);
+               ErrorMessage msg=new ErrorMessage("Number Already Registered ! try with another","numberExist","alert-danger");
+               HttpSession s=request.getSession();
+               s.setAttribute("Message", msg);
+               
+               response.sendRedirect("register.jsp");
             }
             else
             {
                 User user=new User(username,email,address,number,password,type,status);
       
                 if (dao.insertUser(user)) {
-                    request.setAttribute("registrationSuccess", true);
-                    request.getRequestDispatcher("register.jsp").forward(request, response);
+                    ErrorMessage msg=new ErrorMessage("Registration Succesfull !","registerSuccess","alert-success");
+                    HttpSession s=request.getSession();
+                    s.setAttribute("Message", msg);
+
+                    response.sendRedirect("login.jsp");
                  }
             }
 

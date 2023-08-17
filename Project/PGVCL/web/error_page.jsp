@@ -18,7 +18,7 @@
     <div class="container text-center">
         <img src="img/warning.png" class="img-fluid">
         <h3 class="display-3">Sorry! Something went wrong...</h3>
-        <%= exception %>
+        <%= exception %><br/>
         <a href="index.jsp" class="btn btn-primary btn-lg text-white mt-3">Home</a>
     </div>
 </body>

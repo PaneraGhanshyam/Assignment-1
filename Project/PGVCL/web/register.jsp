@@ -1,3 +1,4 @@
+<%@page import="com.PGVCL.Entities.ErrorMessage"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page errorPage="error_page.jsp" %>
 <!DOCTYPE html>
@@ -24,13 +25,26 @@
         <div class="card-header">
           Registration
         </div>
+           <%
+            ErrorMessage m=(ErrorMessage)session.getAttribute("Message");
+            
+            if(m!=null && m.getType().equals("numberExist"))
+            {
+          %>
+          
+                <div class="alert alert-danger" role="alert">
+                    <%= m.getContent() %>
+                </div>
+          <%  session.removeAttribute("Message");
+            } 
+          %>
         <div class="card-body" style="background-color: #b0bec5; border-radius: 10px;">
           <form id="reg-form" action="RegisterServlet" method="POST">
             <div class="form-group">
               <label for="username" style="color: black;">Username</label>
               <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" required>
               <div class="invalid-feedback">
-                Username must contain alphabets and numbers, and be at least 6 characters long.
+                Username must contain alphabet,numbers and special character.
               </div>
             </div>
             <div class="form-group">
@@ -120,7 +134,7 @@
     });
 
     function validateUsername(username) {
-      const pattern = /^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$/;
+      const pattern = /^(?=.*[a-zA-Z])(?=.*[0-9])\w+$/;
       return pattern.test(username);
     }
 
@@ -144,29 +158,9 @@
     }
   });
 </script>
+
 <!-- Bootstrap JS and jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
-<%
-boolean registrationSuccess = request.getAttribute("registrationSuccess") != null && (boolean) request.getAttribute("registrationSuccess");
-boolean check=true;
-if (registrationSuccess==check && request.getAttribute("registrationSuccess") != null) 
-{
-%>
-    <script>
-        alert("Registration successful");
-        window.location.replace("login.jsp");
-    </script>
-<%
-}
-else if(registrationSuccess!=check && request.getAttribute("registrationSuccess") != null)
-{
-%>
-
-    <script>
-        alert("Number already exist.");
-        window.location.replace("register.jsp");
-    </script>
-<% } %>

@@ -3,6 +3,7 @@
     Created on : Aug 13, 2023, 8:32:25 PM
     Author     : ghanshyam
 --%>
+<%@page import="com.PGVCL.Entities.ErrorMessage"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page errorPage="error_page.jsp" %>
 <!DOCTYPE html>
@@ -38,6 +39,47 @@
         <div class="card-header">
           Login
         </div>
+          
+          <%
+            ErrorMessage m=(ErrorMessage)session.getAttribute("Message");
+            
+            if(m!=null && m.getType().equals("userNotFound"))
+            {
+          %>
+          
+                <div class="alert alert-danger" role="alert">
+                    <%= m.getContent() %>
+                </div>
+          <%  session.removeAttribute("Message");
+            } 
+            else if(m!=null && m.getType().equals("userDeactive"))
+            {
+          %>
+                <div class="alert alert-danger" role="alert">
+                    <%= m.getContent() %>
+                </div>
+          <%  session.removeAttribute("Message");
+            } 
+            if(m!=null && m.getType().equals("registerSuccess"))
+            {
+          %>
+                
+                <div class="alert alert-success" role="alert">
+                    <%= m.getContent() %>
+                </div>
+          <%  session.removeAttribute("Message");
+            }
+            if(m!=null && m.getType().equals("userLogout"))
+            {
+          %>
+                <div class="alert alert-success" role="alert">
+                    <%= m.getContent() %>
+                </div>
+          <%  session.removeAttribute("Message");
+            }
+          %>
+          
+          
         <div class="card-body" style="background-color: #b0bec5; border-radius: 10px;">
           <!-- Login Form -->
           <form action="LoginServlet" method="POST" onsubmit="showPreloader()">
@@ -78,28 +120,5 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<%
-boolean loginSuccess = request.getAttribute("loginSuccess") != null && (boolean) request.getAttribute("loginSuccess");
-boolean checkStatus = request.getAttribute("checkStatus") != null && (boolean) request.getAttribute("checkStatus");
-boolean userExists = request.getAttribute("userExists") != null && (boolean) request.getAttribute("userExists");
-boolean con = false;
-if (loginSuccess == con && request.getAttribute("loginSuccess") != null) {
-%>
-<script>
-    alert("Enter valid detail.");
-    window.location.replace("login.jsp");
-</script>
-<%
-    request.removeAttribute("loginSuccess");
-} else if (checkStatus == con && request.getAttribute("checkStatus") != null) {
-%>
-<script>
-    alert("Account deactive.");
-    window.location.replace("login.jsp");
-</script>
-<%
-    request.removeAttribute("checkStatus");
-}
-%>
 </body>
 </html>

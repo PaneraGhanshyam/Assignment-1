@@ -1,7 +1,10 @@
 
 package com.PGVCL.Servelets;
 
+import com.PGVCL.Dao.UserDao;
 import com.PGVCL.Entities.ErrorMessage;
+import com.PGVCL.Entities.Rates;
+import com.PGVCL.Helper.ConnectionProvider;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -14,7 +17,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author ghanshyam
  */
-public class LogoutServlet extends HttpServlet {
+public class EditRatesServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,17 +36,29 @@ public class LogoutServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LogoutServlet</title>");            
+            out.println("<title>Servlet EditRatesServlet</title>");            
             out.println("</head>");
             out.println("<body>");
             
-             HttpSession s=request.getSession();
-             s.removeAttribute("currentUser");
-             
-             ErrorMessage msg=new ErrorMessage("Successfully Logout !","userLogout","alert-success");
-             s.setAttribute("Message", msg);
-             
-             response.sendRedirect("login.jsp");
+            String unitLessHundred=request.getParameter("unitLessHundred");
+            String unitBetweenHundredTwoHundred=request.getParameter("unitBetweenHundredTwoHundred");
+            String unitBetweenTwoHundredThreeHundred=request.getParameter("unitBetweenTwoHundredThreeHundred");
+            String unitGreaterThanThreeHundred=request.getParameter("unitGreaterThanThreeHundred");       
+            
+            UserDao dao=new UserDao(ConnectionProvider.getConnection());
+            
+            Rates rates=new Rates(unitLessHundred,unitBetweenHundredTwoHundred,unitBetweenTwoHundredThreeHundred,unitGreaterThanThreeHundred);
+            
+//          out.print(rates.getUnit_Less_Than_Hundread()+":"+rates.getUnit_Between_Hundread_To_Two_Hundread()+":"+rates.getUnit_Between_Two_Hundread_to_Three_Hundread()+":"+rates.getUnit_Greater_Than_Three_Hundread());
+            
+            if(dao.updateRates(rates))
+            {
+                HttpSession s=request.getSession();
+                ErrorMessage msg=new ErrorMessage("update Succesfull !","rateUpdateSucces","alert-success");
+                s.setAttribute("Message", msg);
+                
+                response.sendRedirect("rates.jsp");
+            }
             
             out.println("</body>");
             out.println("</html>");

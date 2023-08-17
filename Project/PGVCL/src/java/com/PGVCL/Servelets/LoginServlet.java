@@ -2,6 +2,8 @@
 package com.PGVCL.Servelets;
 
 import com.PGVCL.Dao.UserDao;
+import com.PGVCL.Entities.ErrorMessage;
+import com.PGVCL.Entities.Rates;
 import com.PGVCL.Entities.User;
 import com.PGVCL.Helper.ConnectionProvider;
 import java.io.IOException;
@@ -48,17 +50,24 @@ public class LoginServlet extends HttpServlet {
             
            User user=dao.getUserByNumberAndPassword(Number, Password, Type);
            
+           
            if(user==null)
            {   
                //error            
-               request.setAttribute("loginSuccess", false);
-               request.getRequestDispatcher("login.jsp").forward(request, response);
+               ErrorMessage msg=new ErrorMessage("Invalid Details ! try with another","userNotFound","alert-danger");
+               HttpSession s=request.getSession();
+               s.setAttribute("Message", msg);
+               
+               response.sendRedirect("login.jsp");
            }
            else if(user.getStatus().equals("deactive"))
            {    
                 //checkstatus
-                request.setAttribute("checkStatus", false);
-                request.getRequestDispatcher("login.jsp").forward(request, response);
+                 ErrorMessage msg=new ErrorMessage("Account Deactive ! try later","userDeactive","alert-danger");
+                 HttpSession s=request.getSession();
+                 s.setAttribute("Message", msg);
+                 
+                 response.sendRedirect("login.jsp");
            }
            else if(user.getStatus().equals("active"))
            {

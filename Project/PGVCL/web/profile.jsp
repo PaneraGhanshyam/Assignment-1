@@ -43,8 +43,8 @@
           <div class="row justify-content-center">
             <div class="col-md-8">
               <div class="card">
-                <div class="card-header" style="background-color: #b0bec5; color: black;">
-                  User Information
+                <div class="card-header" style="background-color: #b0bec5; color: white;">
+                    <b>User Information</b>
                 </div>
                  <%
                     ErrorMessage m=(ErrorMessage)session.getAttribute("Message");

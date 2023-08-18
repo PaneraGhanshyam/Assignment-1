@@ -3,7 +3,9 @@ package com.PGVCL.Dao;
 
 import com.PGVCL.Entities.Rates;
 import com.PGVCL.Entities.User;
+import com.PGVCL.Entities.UserData;
 import java.sql.*;
+import java.util.*;
 
 /**
  *
@@ -191,5 +193,88 @@ public class UserDao {
         }
         return f;
     }
+    
+    //method get all information of all the user
+    public List getUserData()
+    {
+        List<UserData> u_Data = new ArrayList<>();
+        
+        try{
+           
+            String query="select * from user where type='user'";
+            
+            PreparedStatement pstmt=con.prepareStatement(query);
+            
+            ResultSet set=pstmt.executeQuery();
+            
+            while(set.next()){
+                
+                int id=set.getInt("id");
+                String username=set.getString("username");
+                String email=set.getString("email");
+                String address=set.getString("address");
+                String number=set.getString("number");
+                String password=set.getString("password");
+                String type=set.getString("type");
+                String status=set.getString("status");
+                
+                UserData user=new UserData(id, username, email, address, number, password, type, status);
+                
+                u_Data.add(user);
+            }
+            
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return u_Data;
+    }
+    
+    //delete user
+    public boolean deleteUser(int id)
+    {
+        boolean f=false;
 
+        try {
+            String query="delete from user where id=?";
+            
+            PreparedStatement pstmt = this.con.prepareStatement(query);
+            
+            pstmt.setInt(1,id);
+            
+            pstmt.execute();
+            f=true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }           
+        return f;
+    }
+    
+    //edit user 
+    public Boolean editUser(int id, String username, String email, String address, String number, String password, String status)
+    {
+        boolean f=false;
+        try
+        {   
+           
+            String query="update user set username=? , email=? , address=? , number=? , password=? , status=? where id=?";
+            PreparedStatement pstmt=this.con.prepareStatement(query) ;
+            
+            pstmt.setString(1,username);
+            pstmt.setString(2,email);
+            pstmt.setString(3,address);
+            pstmt.setString(4,number);
+            pstmt.setString(5, password);
+            pstmt.setString(6, status);
+            pstmt.setInt(7, id);
+
+            
+            pstmt.executeUpdate();
+            f=true;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return f;
+    }
 }

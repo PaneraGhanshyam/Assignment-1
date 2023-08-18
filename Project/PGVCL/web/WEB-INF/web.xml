@@ -20,6 +20,14 @@
         <servlet-name>EditRatesServlet</servlet-name>
         <servlet-class>com.PGVCL.Servelets.EditRatesServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditCustomer</servlet-name>
+        <servlet-class>com.PGVCL.Servelets.EditCustomer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteCustomer</servlet-name>
+        <servlet-class>com.PGVCL.Servelets.DeleteCustomer</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
@@ -39,6 +47,14 @@
     <servlet-mapping>
         <servlet-name>EditRatesServlet</servlet-name>
         <url-pattern>/EditRatesServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditCustomer</servlet-name>
+        <url-pattern>/EditCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteCustomer</servlet-name>
+        <url-pattern>/DeleteCustomer</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

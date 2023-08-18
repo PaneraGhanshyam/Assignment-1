@@ -38,23 +38,13 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css">
 </head>
 <body style="background-color: #eceff1;">
-        <% 
-            if(user.getType().equals("admin"))
-            {
-        %>
-                <%@include file="auth_nav.jsp" %>
-        <%  }
-            else
-            {
-        %>      
-                <%@include file="user_nav.jsp" %>
-        <%  } %>
+       <%@include file="auth_nav.jsp" %>
         <div class="container mt-5">
           <div class="row justify-content-center">
             <div class="col-md-8">
               <div class="card">
-                <div class="card-header" style="background-color: #b0bec5; color: black;">
-                  Rate information
+                <div class="card-header" style="background-color: #b0bec5; color: white;">
+                    <b>Rate information</b>
                 </div>
                  <% 
                     ErrorMessage m=(ErrorMessage)session.getAttribute("Message");

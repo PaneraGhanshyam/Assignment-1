@@ -32,7 +32,7 @@
                     <a class="nav-link" href="profile.jsp">Profile</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Customer</a>
+                    <a class="nav-link" href="customer.jsp">Customer</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Generate Bill</a>

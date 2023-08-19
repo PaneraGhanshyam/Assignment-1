@@ -76,6 +76,7 @@
                 <div class="card">
                     <div class="card-header"><h7><b><%= userData.getUsername() %></b></h7></div>
                     <div class="card-body">
+                        <p><strong>Id:</strong> <%= userData.getId() %></p>
                         <p><strong>Email:</strong> <%= userData.getEmail() %></p>
                         <p><strong>Address:</strong> <%= userData.getAddress() %></p>
                         <p><strong>Number:</strong> <%= userData.getNumber() %></p>
@@ -158,73 +159,63 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-          const form = document.querySelector('#edit-form'); // Select the form element
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('#edit-form'); // Select the form element
 
-          form.addEventListener('submit', function(event) { // Listen for 'submit' event
+        form.addEventListener('submit', function(event) { // Listen for 'submit' event
             const username = document.getElementById('username');
             const email = document.getElementById('email');
             const number = document.getElementById('number');
             const password = document.getElementById('password');
             const confirmPassword = document.getElementById('confirmPassword');
 
+            // Validate form fields
             const isValidUsername = validateUsername(username.value);
             const isValidEmail = validateEmail(email.value);
             const isValidNumber = validateNumber(number.value);
             const isValidPassword = validatePassword(password.value);
             const isValidConfirmPassword = validateConfirmPassword(password.value, confirmPassword.value);
 
-            if (!isValidUsername) {
-              event.preventDefault();
-              username.classList.add('is-invalid');
-            }
+            // If any validation fails, prevent form submission and show validation messages
+            if (!isValidUsername || !isValidEmail || !isValidNumber || !isValidPassword || !isValidConfirmPassword) {
+                event.preventDefault();
 
-            if (!isValidEmail) {
-              event.preventDefault();
-              email.classList.add('is-invalid');
+                // Show validation feedback to the user (e.g., adding 'is-invalid' classes)
+                if (!isValidUsername) username.classList.add('is-invalid');
+                if (!isValidEmail) email.classList.add('is-invalid');
+                if (!isValidNumber) number.classList.add('is-invalid');
+                if (!isValidPassword) password.classList.add('is-invalid');
+                if (!isValidConfirmPassword) confirmPassword.classList.add('is-invalid');
             }
+        });
 
-            if (!isValidNumber) {
-              event.preventDefault();
-              number.classList.add('is-invalid');
-            }
-
-            if (!isValidPassword) {
-              event.preventDefault();
-              password.classList.add('is-invalid');
-            }
-
-            if (!isValidConfirmPassword) {
-              event.preventDefault();
-              confirmPassword.classList.add('is-invalid');
-            }
-          });
-
-          function validateUsername(username) {
+        // Validation functions (same as in your original code)
+        function validateUsername(username) {
             const pattern = /^(?=.*[a-zA-Z])(?=.*[0-9])\w+$/;
             return pattern.test(username);
-          }
+        }
 
-          function validateEmail(email) {
+        function validateEmail(email) {
             const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return pattern.test(email);
-          }
+        }
 
-          function validateNumber(number) {
+        function validateNumber(number) {
             const pattern = /^\d{10}$/;
             return pattern.test(number);
-          }
+        }
 
-          function validatePassword(password) {
+        function validatePassword(password) {
             const pattern = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@#$%^&+=]).{8,}$/;
             return pattern.test(password);
-          }
+        }
 
-          function validateConfirmPassword(password, confirmPassword) {
+        function validateConfirmPassword(password, confirmPassword) {
             return password === confirmPassword;
-          }
-        });
-    </script>
+        }
+    });
+</script>
+
 
     <!-- Include Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

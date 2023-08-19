@@ -38,7 +38,7 @@
                     <a class="nav-link" href="generate_bill.jsp">Generate Bill</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Payments</a>
+                    <a class="nav-link" href="payments.jsp">Payments</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="rates.jsp">Rates</a>

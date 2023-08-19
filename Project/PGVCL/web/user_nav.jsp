@@ -35,7 +35,7 @@
                     <a class="nav-link" href="Bills.jsp">Bills</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">History</a>
+                    <a class="nav-link" href="history.jsp">History</a>
                 </li>
             </ul>
 

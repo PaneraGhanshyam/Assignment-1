@@ -370,4 +370,121 @@ public class UserDao {
         return f;
     }
     
+    //method get history
+    public List getHistory(String userNumber)
+    {
+
+          List<BillData> b_Data = new ArrayList<>();
+        
+        try{
+           
+            String query="select * from bill where status='paid' and number=? ";
+            
+            PreparedStatement pstmt=con.prepareStatement(query);
+            
+            pstmt.setString(1, userNumber);
+            
+            ResultSet set=pstmt.executeQuery();
+            
+            while(set.next()){
+                
+                int b_id=set.getInt("bill_id");
+                String u_id=set.getString("u_id");
+                String username=set.getString("username");
+                String number=set.getString("number");
+                String address=set.getString("address");
+                String year=set.getString("year");
+                String month=set.getString("month");
+                int amount=set.getInt("amount");
+                String status=set.getString("status");
+                
+                BillData bill_data=new BillData(b_id,u_id,username,number,address,year,month,amount,status);
+                
+                b_Data.add(bill_data);
+            }
+            
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return b_Data;
+    }
+    
+    //method get unpaid bill data
+    public List getUnpaid()
+    {
+
+          List<BillData> b_Data = new ArrayList<>();
+        
+        try{
+           
+            String query="select * from bill where status='unpaid'";
+            
+            PreparedStatement pstmt=con.prepareStatement(query);
+            
+            ResultSet set=pstmt.executeQuery();
+            
+            while(set.next()){
+                
+                int b_id=set.getInt("bill_id");
+                String u_id=set.getString("u_id");
+                String username=set.getString("username");
+                String number=set.getString("number");
+                String address=set.getString("address");
+                String year=set.getString("year");
+                String month=set.getString("month");
+                int amount=set.getInt("amount");
+                String status=set.getString("status");
+                
+                BillData bill_data=new BillData(b_id,u_id,username,number,address,year,month,amount,status);
+                
+                b_Data.add(bill_data);
+            }
+            
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return b_Data;
+    }
+    //method paid bill data
+    public List getPaid()
+    {
+
+          List<BillData> b_Data = new ArrayList<>();
+        
+        try{
+           
+            String query="select * from bill where status='paid'";
+            
+            PreparedStatement pstmt=con.prepareStatement(query);
+            
+            ResultSet set=pstmt.executeQuery();
+            
+            while(set.next()){
+                
+                int b_id=set.getInt("bill_id");
+                String u_id=set.getString("u_id");
+                String username=set.getString("username");
+                String number=set.getString("number");
+                String address=set.getString("address");
+                String year=set.getString("year");
+                String month=set.getString("month");
+                int amount=set.getInt("amount");
+                String status=set.getString("status");
+                
+                BillData bill_data=new BillData(b_id,u_id,username,number,address,year,month,amount,status);
+                
+                b_Data.add(bill_data);
+            }
+            
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return b_Data;
+    }
 }

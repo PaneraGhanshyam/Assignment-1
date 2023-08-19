@@ -28,6 +28,18 @@
         <servlet-name>DeleteCustomer</servlet-name>
         <servlet-class>com.PGVCL.Servelets.DeleteCustomer</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>userFound</servlet-name>
+        <servlet-class>com.PGVCL.Servelets.userFound</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>generateBill</servlet-name>
+        <servlet-class>com.PGVCL.Servelets.generateBill</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PayBill</servlet-name>
+        <servlet-class>com.PGVCL.Servelets.PayBill</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
@@ -55,6 +67,18 @@
     <servlet-mapping>
         <servlet-name>DeleteCustomer</servlet-name>
         <url-pattern>/DeleteCustomer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>userFound</servlet-name>
+        <url-pattern>/userFound</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>generateBill</servlet-name>
+        <url-pattern>/generateBill</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PayBill</servlet-name>
+        <url-pattern>/PayBill</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

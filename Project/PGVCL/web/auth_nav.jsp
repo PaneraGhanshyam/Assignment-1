@@ -35,7 +35,7 @@
                     <a class="nav-link" href="customer.jsp">Customer</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Generate Bill</a>
+                    <a class="nav-link" href="generate_bill.jsp">Generate Bill</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Payments</a>

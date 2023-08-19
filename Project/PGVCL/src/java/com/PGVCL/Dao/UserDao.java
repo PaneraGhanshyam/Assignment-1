@@ -1,6 +1,7 @@
 
 package com.PGVCL.Dao;
 
+import com.PGVCL.Entities.BillData;
 import com.PGVCL.Entities.Rates;
 import com.PGVCL.Entities.User;
 import com.PGVCL.Entities.UserData;
@@ -238,12 +239,16 @@ public class UserDao {
 
         try {
             String query="delete from user where id=?";
+            String query2="delete from bill where u_id=?";
             
             PreparedStatement pstmt = this.con.prepareStatement(query);
+            PreparedStatement pstmt2 = this.con.prepareStatement(query2);
             
             pstmt.setInt(1,id);
+            pstmt2.setInt(1,id);
             
             pstmt.execute();
+            pstmt2.execute();
             f=true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -277,4 +282,92 @@ public class UserDao {
         }
         return f;
     }
+    
+    //insert bill data
+    public Boolean insertBill(String u_id,String username,String number,String address,String year,String month,int amount)
+    {
+        boolean f=false;
+        try
+        {   
+           
+            String query="insert into bill(u_id,username,number,address,year,month,amount) values(?,?,?,?,?,?,?)";
+            PreparedStatement pstmt=this.con.prepareStatement(query) ;
+            
+            pstmt.setString(1, u_id);
+            pstmt.setString(2, username);
+            pstmt.setString(3, number);
+            pstmt.setString(4, address);
+            pstmt.setString(5, year);
+            pstmt.setString(6, month);
+            pstmt.setInt(7, amount);
+            
+            pstmt.executeUpdate();
+            f=true;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return f;
+    }
+    
+    //method get all information of bill per user
+    public List getBillData(String userNumber)
+    {
+
+          List<BillData> b_Data = new ArrayList<>();
+        
+        try{
+           
+            String query="select * from bill where status='unpaid' and number=? ";
+            
+            PreparedStatement pstmt=con.prepareStatement(query);
+            
+            pstmt.setString(1, userNumber);
+            
+            ResultSet set=pstmt.executeQuery();
+            
+            while(set.next()){
+                
+                int b_id=set.getInt("bill_id");
+                String u_id=set.getString("u_id");
+                String username=set.getString("username");
+                String number=set.getString("number");
+                String address=set.getString("address");
+                String year=set.getString("year");
+                String month=set.getString("month");
+                int amount=set.getInt("amount");
+                String status=set.getString("status");
+                
+                BillData bill_data=new BillData(b_id,u_id,username,number,address,year,month,amount,status);
+                
+                b_Data.add(bill_data);
+            }
+            
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return b_Data;
+    }
+    
+    //Pay bills
+    public boolean payBill(int id)
+    {
+        boolean f=false;
+
+        try {
+            String query="update bill set status='paid' where bill_id=?";
+            
+            PreparedStatement pstmt = this.con.prepareStatement(query);
+            
+            pstmt.setInt(1,id);
+            
+            pstmt.execute();
+            f=true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }           
+        return f;
+    }
+    
 }

@@ -142,7 +142,7 @@
                                   <label for="status" style="color: black;">Status</label>
                                   <select class="form-control" name="status" id="role" required="">
                                     <option value="deactive">Deactive</option>
-                                    <option value="active">Active</option>
+                                    <option value="active" selected="">Active</option>
                                   </select>
                                   <input type="hidden" name="id" value="<%= userData.getId() %>">
                                   <div class="modal-footer">
